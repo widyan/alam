@@ -6,8 +6,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.widyan.alamku.customs.CustomEditTextLatoRegular;
+import com.widyan.alamku.dao.UserDao;
 import com.widyan.alamku.interfaces.api.APIServices;
 import com.widyan.alamku.models.User;
 import com.widyan.alamku.utils.Constants;
@@ -24,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btn_login;
     LinearLayout btn_to_register;
     private APIServices mAPIService;
+    private UserDao userDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +39,16 @@ public class LoginActivity extends AppCompatActivity {
         btn_to_register = (LinearLayout)findViewById(R.id.btn_to_register);
 
         mAPIService = Utils.getAPIService();
+        userDao = new UserDao(mAPIService);
+
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.i("ALAMKU","username = " + ediTxt_username.getText().toString());
                 Log.i("ALAMKU","pass = " + edtTxt_password.getText().toString());
                 Log.i("ALAMKU","md5 pass = " + Utils.md5(edtTxt_password.getText().toString()));
-                login(ediTxt_username.getText().toString(), Utils.md5(edtTxt_password.getText().toString()));
+                userDao.login(ediTxt_username.getText().toString(), Utils.md5(edtTxt_password.getText().toString()));
+                //login(ediTxt_username.getText().toString(), Utils.md5(edtTxt_password.getText().toString()));
                 //Utils.startThisActivity(LoginActivity.this, AlamkuActivity.class);
             }
         });
@@ -54,24 +60,5 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void login(String username, String password){
-        Log.i("ALAMKU", Constants.Apps.LOGIN);
-        mAPIService.login(username, password).enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                Log.i("ALAMKU","DATA = " + response.body().getData().get(0).getUsername());
-                if(response.isSuccessful()){
-                    Log.i("ALAMKU","SUCCESS = " + response.body().toString());
-                }else{
-                    Log.i("ALAMKU","ERR = " + response.body().toString());
-                }
-            }
 
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                t.printStackTrace();
-                Log.e("ALAMKU ERR","Unable to submit POST to API");
-            }
-        });
-    }
 }
