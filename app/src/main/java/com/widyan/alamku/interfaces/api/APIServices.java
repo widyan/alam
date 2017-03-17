@@ -42,8 +42,7 @@ public interface APIServices {
     Call<Alam> getListAlam();
 
     @GET(Constants.Apps.BANNER)
-    @FormUrlEncoded
-    Call<Alam> getBanner(@Field("kategori") String kategori);
+    Call<Alam> getBanner(@Query("kategori") int kategori);
 
     @GET(Constants.Apps.FILTER_TEMPAT_WISATA)
     Call<Alam> getFilterAlamDao(@Query("kategori") int kategori);

@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.daimajia.slider.library.SliderLayout;
 import com.widyan.alamku.adapters.GridAlamkuAdapter;
 import com.widyan.alamku.customs.ItemClickSupport;
 import com.widyan.alamku.interfaces.api.APIServices;
@@ -34,6 +35,8 @@ public class AlamkuActivity extends AppCompatActivity {
     ImageView btn_tambah_alam;
     private APIServices mAPIService;
     private ArrayList<AlamData> dataAlam;
+    private ArrayList<AlamData> banner;
+    private SliderLayout mSlider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,21 +58,24 @@ public class AlamkuActivity extends AppCompatActivity {
         mAPIService = Utils.getAPIServiceGenerator();
         dataAlam = new ArrayList<AlamData>();
 
+        final int kode_kategori = setDataSpinner(spinner_kategori.getSelectedItem().toString());
+        Log.i("ALAMKU", "KODE = " + kode_kategori);
         spinner_kategori.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                final int kode_kategori = setDataSpinner(spinner_kategori.getSelectedItem().toString());
-                Log.i("ALAMKU", "KODE = " + kode_kategori);
+
                 swipe_refresh_layout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
                     public void onRefresh() {
                         getFilterAlamDao(kode_kategori);
+                        getBannerAlamDao(kode_kategori);
                     }
                 });
                 swipe_refresh_layout.post(new Runnable() {
                     @Override
                     public void run() {
                         getFilterAlamDao(kode_kategori);
+                        getBannerAlamDao(kode_kategori);
                     }
                 });
             }
@@ -80,12 +86,14 @@ public class AlamkuActivity extends AppCompatActivity {
                     @Override
                     public void onRefresh() {
                         getListAlam();
+                        getBannerAlamDao(kode_kategori);
                     }
                 });
                 swipe_refresh_layout.post(new Runnable() {
                     @Override
                     public void run() {
                         getListAlam();
+                        getBannerAlamDao(kode_kategori);
                     }
                 });
             }
@@ -106,6 +114,31 @@ public class AlamkuActivity extends AppCompatActivity {
                 break;
         }
         return kode_kategori;
+    }
+
+    public void getBannerAlamDao(int kategori) {
+        swipe_refresh_layout.setRefreshing(true);
+        Log.i("ALAMKU", Constants.Apps.BANNER);
+
+        mAPIService.getBanner(kategori).enqueue(new Callback<Alam>() {
+            @Override
+            public void onResponse(Call<Alam> call, Response<Alam> response) {
+                //Log.i("ALAMKU", "FILTER LIST DATA ALAM = " + response.body().getData().get(0).getTitle());
+                if (response.isSuccessful()) {
+                    Log.i("ALAMKU", "SUCCESS GET BANNER DATA ALAM = " + response.body().toString());
+                    banner = response.body().getData();
+                    setDataGrid(banner);
+                } else {
+                    Log.i("ALAMKU", "ERR = " + response.body().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Alam> call, Throwable t) {
+                t.printStackTrace();
+                Log.e("ALAMKU ERR", "Unable to submit GET to API");
+            }
+        });
     }
 
     public void getFilterAlamDao(int kategori) {
@@ -158,8 +191,8 @@ public class AlamkuActivity extends AppCompatActivity {
         });
     }
 
-    public void setDataGrid(final ArrayList<AlamData> dataAlam) {
-        adapter = new GridAlamkuAdapter(AlamkuActivity.this, dataAlam);
+    public void setDataGrid(final ArrayList<AlamData> dataAlam, final ArrayList<AlamData> banner) {
+        adapter = new GridAlamkuAdapter(AlamkuActivity.this, dataAlam, banner);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(AlamkuActivity.this, 2);
         recycleview_alamku.setLayoutManager(gridLayoutManager);
