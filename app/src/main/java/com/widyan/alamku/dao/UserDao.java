@@ -45,6 +45,7 @@ public class UserDao {
                     Log.i("ALAMKU","SUCCESS = " + response.body().toString());
                     SharedPrefData.SaveDataUser(ctx.getApplicationContext(), response.body().getData().get(0));
                     Utils.startThisActivity((Activity) ctx, AlamkuActivity.class);
+                    ((Activity) ctx).finish();
                 }else{
                     Log.i("ALAMKU","ERR = " + response.body().toString());
                 }
@@ -68,6 +69,7 @@ public class UserDao {
                 if(response.isSuccessful()){
                     Log.i("ALAMKU","SUCCESS REGISTER = " + response.body().toString());
                     Utils.startThisActivity((Activity) ctx, LoginActivity.class);
+                    ((Activity) ctx).finish();
                 }else{
                     Log.i("ALAMKU","ERR = " + response.body().toString());
                 }
