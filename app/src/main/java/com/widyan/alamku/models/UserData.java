@@ -7,7 +7,7 @@ package com.widyan.alamku.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Datum {
+public class UserData {
 
     @SerializedName("id_user")
     @Expose

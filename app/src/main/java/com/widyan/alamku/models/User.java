@@ -3,6 +3,7 @@ package com.widyan.alamku.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,13 +13,13 @@ import java.util.List;
 public class User {
     @SerializedName("data")
     @Expose
-    private List<Datum> data = null;
+    private ArrayList<UserData> data = null;
 
-    public List<Datum> getData() {
+    public ArrayList<UserData> getData() {
         return data;
     }
 
-    public void setData(List<Datum> data) {
+    public void setData(ArrayList<UserData> data) {
         this.data = data;
     }
 

@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_to_register = (LinearLayout)findViewById(R.id.btn_to_register);
 
         mAPIService = Utils.getAPIService();
-        userDao = new UserDao(mAPIService);
+        userDao = new UserDao(LoginActivity.this, mAPIService);
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,9 +47,9 @@ public class LoginActivity extends AppCompatActivity {
                 Log.i("ALAMKU","username = " + ediTxt_username.getText().toString());
                 Log.i("ALAMKU","pass = " + edtTxt_password.getText().toString());
                 Log.i("ALAMKU","md5 pass = " + Utils.md5(edtTxt_password.getText().toString()));
-                userDao.login(ediTxt_username.getText().toString(), Utils.md5(edtTxt_password.getText().toString()));
-                //login(ediTxt_username.getText().toString(), Utils.md5(edtTxt_password.getText().toString()));
-                //Utils.startThisActivity(LoginActivity.this, AlamkuActivity.class);
+                if(validation()){
+                    userDao.login(ediTxt_username.getText().toString(), Utils.md5(edtTxt_password.getText().toString()));
+                }
             }
         });
         btn_to_register.setOnClickListener(new View.OnClickListener() {
@@ -60,5 +60,14 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    public boolean validation(){
+        boolean valid_username = Utils.validationInput(ediTxt_username, "username harus diisi");
+        boolean valid_password = Utils.validationInput(edtTxt_password, "password harus diisi");
+        if(valid_username && valid_password){
+            return true;
+        }else {
+            return false;
+        }
+    }
 
 }

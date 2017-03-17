@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.widyan.alamku.DetailAlamkuActivity"
+    tools:showIn="@layout/activity_detail_alamku">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <com.widyan.alamku.customs.CustomTextViewLatoRegular
+                android:id="@+id/txt_detail_nama_alam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gunung Bromo"
+                android:textSize="16sp" />
+
+            <com.widyan.alamku.customs.CustomTextViewLatoLight
+                android:id="@+id/txt_lokasi_alam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kab. Jawa Timur"
+                android:textSize="13sp" />
+
+            <com.widyan.alamku.customs.CustomTextViewLatoLight
+                android:id="@+id/txt_created_at_alam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="28 Sep 2017"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/colorAbu" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.widyan.alamku.customs.CustomTextViewLatoRegular
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Rating"
+                android:textSize="13sp" />
+
+            <com.widyan.alamku.customs.CustomTextViewBoldRoboto
+                android:id="@+id/txt_rating_alamku"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="2.0"
+                android:textSize="20sp" />
+
+            <RatingBar
+                android:id="@+id/rate_bar_alamku"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/ratingBarStyleIndicator" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/colorAbu" />
+
+        <com.widyan.alamku.customs.CustomTextViewLatoLight
+            android:id="@+id/txt_deskripsi_alamku"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@string/large_text" />
+    </LinearLayout>
+
+
+</android.support.v4.widget.NestedScrollView>

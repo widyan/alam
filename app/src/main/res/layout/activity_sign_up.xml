@@ -95,9 +95,10 @@
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp">
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="12dp">
 
-                        <com.widyan.alamku.customs.CustomEditTextLatoRegular
+                        <com.widyan.alamku.customs.CustomTextViewLatoRegular
                             android:id="@+id/edtTxt_tgl_lahir"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -134,6 +135,7 @@
                             android:textSize="17sp" />
 
                         <RadioGroup
+                            android:id="@+id/radio_group"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
@@ -142,7 +144,8 @@
                                 android:id="@+id/radio_lakilaki"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Laki - Laki"
+                                android:text="Male"
+                                android:checked="true"
                                 android:textColor="@color/colorWhite" />
 
                             <RadioButton
@@ -150,7 +153,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="12dp"
-                                android:text="Perempuan"
+                                android:text="Female"
                                 android:textColor="@color/colorWhite" />
                         </RadioGroup>
                     </LinearLayout>
