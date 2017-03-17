@@ -75,9 +75,12 @@ public class SignUpActivity extends AppCompatActivity {
 
                 Log.i("ALAMKU","jenis kelamin = " + jenis_kelamin);
 
-                userDao.register(ediTxt_firstname.getText().toString(), ediTxt_lastname.getText().toString(),
-                        edtTxt_username.getText().toString(), edtTxt_password.getText().toString(),
-                        edtTxt_tgl_lahir.getText().toString(),jenis_kelamin,edtTxt_phone.getText().toString());
+                if(validation()){
+                    userDao.register(ediTxt_firstname.getText().toString(), ediTxt_lastname.getText().toString(),
+                            edtTxt_username.getText().toString(), edtTxt_password.getText().toString(),
+                            edtTxt_tgl_lahir.getText().toString(),jenis_kelamin,edtTxt_phone.getText().toString());
+                }
+
                 //Utils.startThisActivity(SignUpActivity.this, LoginActivity.class);
             }
         });
@@ -86,6 +89,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Utils.startThisActivity(SignUpActivity.this, LoginActivity.class);
+                finish();
             }
         });
     }
@@ -110,5 +114,25 @@ public class SignUpActivity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         edtTxt_tgl_lahir.setText(sdf.format(myCalendar.getTime()));
+    }
+
+    public boolean validation(){
+        boolean valid_tgl_lahir = false;
+        boolean valid_username = Utils.validationInput(edtTxt_username, "username harus diisi");
+        boolean valid_password = Utils.validationInput(edtTxt_password, "password harus diisi");
+        boolean valid_firstname = Utils.validationInput(ediTxt_firstname, "firstname harus diisi");
+        boolean valid_lastname = Utils.validationInput(ediTxt_lastname, "lastname harus diisi");
+        boolean valid_phone = Utils.validationInput(edtTxt_phone, "phone harus diisi");
+        if(edtTxt_tgl_lahir.getText().equals("") || edtTxt_tgl_lahir.getText() == null){
+            valid_tgl_lahir =false;
+        }else {
+            valid_tgl_lahir = true;
+        }
+
+        if(valid_username && valid_password && valid_firstname && valid_lastname && valid_phone && valid_tgl_lahir){
+            return true;
+        }else {
+            return false;
+        }
     }
 }

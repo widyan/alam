@@ -1,18 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <com.daimajia.slider.library.SliderLayout
         android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
         custom:auto_cycle="true"
         custom:indicator_visibility="visible"
         custom:pager_animation="Accordion"
-        custom:pager_animation_span="1100"
-        android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        custom:pager_animation_span="1100" />
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:padding="5dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/slider"
+        android:orientation="vertical">
+
+        <com.widyan.alamku.customs.CustomTextViewLatoRegular
+            android:id="@+id/txt_banner_judul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="test" />
+
+        <com.widyan.alamku.customs.CustomTextViewLatoLight
+            android:id="@+id/txt_banner_deskripsi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLength="100"
+            android:textSize="12sp"
+            android:text="test" />
+
+        <com.widyan.alamku.customs.CustomTextViewLatoLight
+            android:id="@+id/txt_banner_created_at"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="tets" />
+    </LinearLayout>
+</RelativeLayout>

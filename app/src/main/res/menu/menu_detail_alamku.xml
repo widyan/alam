@@ -1,10 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.widyan.alamku.DetailAlamkuActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_tambah_data"
+        android:icon="@drawable/ic_add_white_24dp"
+        android:title="Tambah Data"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_logout"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="Logout"
         app:showAsAction="never" />
 </menu>

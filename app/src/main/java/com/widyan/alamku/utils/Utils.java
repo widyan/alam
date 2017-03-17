@@ -24,7 +24,6 @@ public class Utils {
     public static void startThisActivity(Activity ctx, Class classname){
         Intent i = new Intent(ctx, classname);
         ctx.startActivity(i);
-        ctx.finish();
     }
 
     public static void startThisActivityWithParams(Activity ctx, Class classname, ArrayList data, String key){
@@ -38,7 +37,6 @@ public class Utils {
         Intent i = new Intent(ctx, classname);
         i.putExtra(key, data);
         ctx.startActivity(i);
-        ctx.finish();
     }
 
     public static boolean validationInput(EditText editText, String errormsg){

@@ -11,6 +11,7 @@ import com.widyan.alamku.interfaces.api.APIServices;
 import com.widyan.alamku.models.User;
 import com.widyan.alamku.models.UserData;
 import com.widyan.alamku.utils.Constants;
+import com.widyan.alamku.utils.SharedPrefData;
 import com.widyan.alamku.utils.Utils;
 
 import retrofit2.Call;
@@ -42,6 +43,7 @@ public class UserDao {
                 Log.i("ALAMKU","DATA BARU = " + response.body().getData().get(0).getUsername());
                 if(response.isSuccessful()){
                     Log.i("ALAMKU","SUCCESS = " + response.body().toString());
+                    SharedPrefData.SaveDataUser(ctx.getApplicationContext(), response.body().getData().get(0));
                     Utils.startThisActivity((Activity) ctx, AlamkuActivity.class);
                 }else{
                     Log.i("ALAMKU","ERR = " + response.body().toString());

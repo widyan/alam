@@ -97,6 +97,7 @@ public class DetailAlamkuActivity extends AppCompatActivity {
                     txt_created_at_alam.setText(dataAlam.get(0).getCreatedAt().toString());
                     txt_deskripsi_alamku.setText(dataAlam.get(0).getDescription().toString());
                     txt_rating_alamku.setText(dataAlam.get(0).getRate().toString());
+                    rate_bar_alamku.setRating(Float.parseFloat(dataAlam.get(0).getRate().toString()));
 
                     Picasso.with(DetailAlamkuActivity.this).load(Constants.Apps.URL_IMAGE+dataAlam.get(0).getUrlImage().toString()).into(img_detail_alamku);
 

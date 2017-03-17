@@ -32,6 +32,6 @@ public class Constants {
     }
 
     public static class Preferences{
-
+        public static final String USER_DATA = "USER_DATA";
     }
 }
